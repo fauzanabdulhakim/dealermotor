@@ -42,6 +42,7 @@ class _MyHomeState extends State<MyHome> {
         title: Text('Motor Bike Deal'),
         actions: [
           IconButton(
+            padding: EdgeInsets.symmetric(horizontal: 10),
             icon: Icon(Icons.search),
             onPressed: () {
               showSearch(
@@ -61,7 +62,7 @@ class _MyHomeState extends State<MyHome> {
                   carouselController: _carouselController,
                   options: CarouselOptions(
                     scrollPhysics: BouncingScrollPhysics(),
-                    height: 220.0,
+                    height: 300.0,
                     autoPlay: true,
                     aspectRatio: 16 / 9,
                     viewportFraction: 1,
@@ -116,7 +117,7 @@ class _MyHomeState extends State<MyHome> {
               ],
             ),
             Container(
-              margin: EdgeInsets.only(top: 30),
+              margin: EdgeInsets.only(top: 10),
               child: Text(
                 'Pilih Motor Favorit Anda',
                 style: TextStyle(
@@ -125,9 +126,7 @@ class _MyHomeState extends State<MyHome> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10,),
             PagerWidget(
               onPageSelected: (index) {
                 setState(() {
@@ -172,7 +171,7 @@ class _PagerWidgetState extends State<PagerWidget> {
     return Container(
       height: 30.0,
       padding: EdgeInsets.symmetric(horizontal: 40),
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      margin: EdgeInsets.symmetric(horizontal: 20),
       child: ListView.separated(
         itemCount: pagerItems.length,
         scrollDirection: Axis.horizontal,
@@ -221,60 +220,75 @@ class GridWidget extends StatelessWidget {
       motorDataListFiltered = motorDataList;
     }
 
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-      ),
-      itemCount: motorDataListFiltered.length,
-      itemBuilder: (BuildContext context, int index) {
-        final motor = motorDataListFiltered[index];
-        return InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => MotorDetailPage(motor: motor),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        int crossAxisCount = 2; // Default: 2 kolom
+
+        // Atur jumlah kolom berdasarkan lebar layar
+        if (constraints.maxWidth >= 1200) {
+          crossAxisCount = 6; // Jika melebihi 1200, tampilkan 6 kolom
+        } else if (constraints.maxWidth >= 600) {
+          crossAxisCount = 4; // Jika melebihi 600, tampilkan 4 kolom
+        }
+
+        return GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+          ),
+          itemCount: motorDataListFiltered.length,
+          itemBuilder: (BuildContext context, int index) {
+            final motor = motorDataListFiltered[index];
+            return InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => MotorDetailPage(motor: motor),
+                  ),
+                );
+              },
+              child: Card(
+                elevation: 2.0,
+                margin: EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Hero(
+                          tag: 'motor_${motor.name}',
+                          child: CachedNetworkImage(
+                            imageUrl: motor.imageUrls.isNotEmpty
+                                ? motor.imageUrls[0]
+                                : 'URL_GAMBAR_DEFAULT',
+                            fit: BoxFit.contain,
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
+                          ),
+                        ),
+                        SizedBox(height: 8.0),
+                        Text(
+                          motor.name,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          motor.price,
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             );
           },
-          child: Card(
-            elevation: 2.0,
-            margin: EdgeInsets.all(8.0),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Hero(
-                    tag: 'motor_${motor.name}',
-                    child: CachedNetworkImage(
-                      imageUrl: motor.imageUrls.isNotEmpty
-                          ? motor.imageUrls[0]
-                          : 'URL_GAMBAR_DEFAULT',
-                      fit: BoxFit.contain,
-                      //placeholder: (context, url) => CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    motor.name,
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    motor.price,
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
         );
       },
     );
