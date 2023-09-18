@@ -170,7 +170,7 @@ class _PagerWidgetState extends State<PagerWidget> {
   Widget build(BuildContext context) {
     return Container(
       height: 30.0,
-      padding: EdgeInsets.symmetric(horizontal: 40),
+      //padding: EdgeInsets.symmetric(horizontal: 40),
       margin: EdgeInsets.symmetric(horizontal: 20),
       child: ListView.separated(
         itemCount: pagerItems.length,
@@ -250,39 +250,40 @@ class GridWidget extends StatelessWidget {
                 elevation: 2.0,
                 margin: EdgeInsets.all(8.0),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Hero(
-                          tag: 'motor_${motor.name}',
-                          child: CachedNetworkImage(
-                            imageUrl: motor.imageUrls.isNotEmpty
-                                ? motor.imageUrls[0]
-                                : 'URL_GAMBAR_DEFAULT',
-                            fit: BoxFit.contain,
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                  padding: const EdgeInsets.all(6.0),
+                  child: SingleChildScrollView(
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Hero(
+                            tag: 'motor_${motor.name}',
+                            child: CachedNetworkImage(
+                              imageUrl: motor.imageUrls.isNotEmpty
+                                  ? motor.imageUrls[0]
+                                  : 'URL_GAMBAR_DEFAULT',
+                              fit: BoxFit.contain,
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          motor.name,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
+                          Text(
+                            motor.name,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Text(
-                          motor.price,
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
+                          Text(
+                            motor.price,
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
