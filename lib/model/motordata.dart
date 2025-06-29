@@ -347,7 +347,7 @@ final List<MotorData> maticData = [
       'Rangka & Kaki-kaki': [
         {
           'Fitur': 'Tipe Rangka',
-          'Detail': 'Underbone)'
+          'Detail': 'Underbone'
         },
         {'Fitur': 'Tipe Suspensi Depan', 'Detail': 'Teleskopik'},
         {
@@ -358,7 +358,7 @@ final List<MotorData> maticData = [
         {'Fitur': 'Ukuran Ban Belakang', 'Detail': '	100/80 - 14M/C 48P Tubeless'},
         {
           'Fitur': 'Rem Depan',
-          'Detail': '	Wavy Disc Brake'
+          'Detail': 'Wavy Disc Brake'
         },
         {'Fitur': 'Rem Belakang', 'Detail': 'Tromol'},
         {'Fitur': 'Sistem Pengereman', 'Detail': 'Combi Brake System (CBS)'},
@@ -441,7 +441,7 @@ final List<MotorData> maticData = [
         {'Fitur': 'Rem Belakang', 'Detail': 'Tromol (CBS), Cakram Hidrolik (ABS)'},
         {'Fitur': 'Sistem Pengereman', 'Detail': 'Combi Brake System (CBS) & Anti-Lock Braking System (ABS)'},
       ],
-      'Dimensi': [
+      'Dimensi & Berat': [
         {
           'Fitur': 'Panjang X Lebar X Tinggi',
           'Detail': '	1.929 x 679 x 1.088 mm'
@@ -509,7 +509,7 @@ final List<MotorData> maticData = [
         {'Fitur': 'Rem Belakang', 'Detail': 'Cakram Hidrolik'},
         {'Fitur': 'Sistem Pengereman', 'Detail': 'Combi Brake System'},
       ],
-      'Dimensi': [
+      'Dimensi & Berat': [
         {
           'Fitur': 'Panjang X Lebar X Tinggi',
           'Detail': '1.936 x 742 x 1.108 mm'
@@ -578,7 +578,7 @@ final List<MotorData> maticData = [
         {'Fitur': 'Rem Belakang', 'Detail': 'Wavy Disc Brake'},
         {'Fitur': 'Sistem Pengereman', 'Detail': 'Triple Pots Hydraulic Combi Brake System (CBS) / Anti-Lock Braking System (ABS)'},
       ],
-      'Dimensi': [
+      'Dimensi & Berat': [
         {
           'Fitur': 'Panjang X Lebar X Tinggi',
           'Detail': '1.950 x 763 x1.196 mm'
